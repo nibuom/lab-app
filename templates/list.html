@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extrahead%}
+<link href="{% static 'css/list.css'%}" rel="stylesheet">
+{% endblock extrahead%}
+
+{% block content %}
+<div class="container">
+    {% if place == "mypost" %}
+     <h1> マイ　プロトコール</h1>
+    {% endif %}
+    {% for item in object_list %}
+    <div class="block">
+        <h2><a href="{% url 'crud:detail' item.pk %}">{{item.title}}</a></h2>
+        <p>作成日: {{ item.created_at }}</p>
+        {% if place != "mypost" %}
+            <p>投稿者：{{item.user.username}}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

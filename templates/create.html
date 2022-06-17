@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extrahead%}
+<link href="{% static 'css/create.css'%}" rel="stylesheet">
+{% endblock extrahead%}
+
+{% block content %}
+<h1 >新しいプロトコール</h1>
+<form action="" method="POST">
+    {{ formset_protocol.management_form }}
+    {% for form in formset_protocol %}
+    <div class="field">
+        <label for="{{ form.title.id_for_label }}">プロトコール名</label>
+        {{form.title}}
+    </div>
+    <div class="field">
+        <label for="{{ form.abst.id_for_label }}"></label>
+        {{form.abst}}
+    </div>
+    <div class="field">
+        {{form.id}}
+    </div>
+    {% endfor %}
+    {{error_message}}
+    <div class="submit">
+        <button type="submit">次へ</button>
+    </div>
+
+    {% csrf_token %}
+</form>
+{% endblock content %}

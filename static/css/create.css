@@ -1,0 +1,10 @@
+body > h1{
+    margin: 0 20%;
+    padding: 0 0 10px 0;
+
+}
+
+form {
+  margin: 0 20%;/*中央寄せ*/
+}
+

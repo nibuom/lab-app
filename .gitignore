@@ -1,0 +1,6 @@
+# 以下のファイルをgithubで公開しない
+# database file
+db.sqlite3
+# 環境変数 file
+setting_local.py
+

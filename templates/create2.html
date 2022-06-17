@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extrahead%}
+<link href="{% static 'css/create.css'%}" rel="stylesheet">
+<script src="{% static 'js/create2.js'%}" type="text/javascript"></script>
+{% endblock extrahead%}
+
+{% block content %}
+<h1 >手技の追加</h1>
+<form action="" method="POST">
+    {{ formset_process.management_form }}
+
+    {% for form in formset_process %}
+    <div class="button">
+        <button type="button" class="add-top-main">main</button>
+        <button type="button" class="add-top-sub">sub</button>
+    </div>
+    <div class="form-block main" id="block-0">
+        <div class="field title">
+            <label for="{{ form.title.id_for_label }}">プロセス</label>
+            {{form.title}}
+        </div>
+        <div class="field content">
+            <label for="{{ form.content.id_for_label }}"></label>
+            {{form.content}}
+        </div>
+        <div class="field time">
+            <label for="{{ form.time.id_for_label }}"></label>
+            {{form.time}}
+        </div>
+        <div class="field sub">
+            {{form.sub}}
+        </div>
+        <div class="field rank">
+            {{form.rank}}
+        </div>
+        <div class="field id">
+            {{form.id}}
+        </div>
+        <button type="button" class="remove">削除</button>
+    </div>
+    <div class="button">
+        <button type="button" class="add-main">main</button>
+        <button type="button" class="add-sub">sub</button>
+    </div>
+
+    {% endfor %}
+    {{error_message}}
+
+    <div class="submit">
+        <button type="submit">送信</button>
+    </div>
+
+    {% csrf_token %}
+</form>
+{% endblock content %}

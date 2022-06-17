@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extrahead%}
+<link href="{% static 'css/detail.css'%}" rel="stylesheet">
+{% endblock extrahead%}
+
+{% block content %}
+<div class="container">
+    <div class="block title">
+        <h2>{{object.title}}</h2>
+        <p>作成日：{{ object.created_at }}  作成者：{{object.user}}</p>
+        <p class="abst">{{object.abst}}</p>
+       {% if object.user == request.user %}  
+       <!-- リクエストユーザーと投稿者が等しい場合のみリンク表示 -->
+       <a href="{% url 'crud:update' object.pk %}" class="btn btn-primary ms-3" tabindex="-1" role="button" aria-disabled="true">編集</a>
+       <a href="{% url 'crud:delete' object.pk %}" class="btn btn-danger ms-3" tabindex="-1" role="button" aria-disabled="true">削除</a>
+       {% endif %}
+    </div>
+
+    {% for pro in process%}
+        {% if pro.sub == False %}
+    <div class="block main">
+        <h4>{{pro.title}}</h4>
+        {% if pro.time != None %}
+        <p>所要時間  {{pro.time}}</p>
+        {% endif %}
+        <p>{{pro.content}}</p>
+    </div>
+        {% else %}
+    <div class="block sub">
+        <h4>{{pro.title}}</h4>
+        {% if pro.time != None %}
+        <p>所要時間  {{pro.time}}</p>
+        {% endif %}
+        <p>{{pro.content}}</p>
+    </div>
+        {% endif %}
+    {% endfor%}
+
+
+</div>
+{% endblock content %}
